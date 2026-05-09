@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Rendez-vous - Hôpital Universitaire de Delmas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: #eef3f0;
+      color: #1a3a2e;
+      line-height: 1.45;
+    }
+
+    /* ========== EN-TÊTE (identique page Docteur) ========== */
+    .hospital-header {
+      background: #0a3b2f;
+      color: white;
+      padding: 1.2rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    }
+
+    .logo-area h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .logo-area h1 span {
+      font-size: 1.9rem;
+    }
+
+    .logo-area p {
+      font-size: 0.75rem;
+      opacity: 0.85;
+      margin-top: 6px;
+    }
+
+    .urgence-badge {
+      background: #c03a2b;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #c0e0d4;
+      text-decoration: underline;
+    }
+
+    /* ========== CONTENU PRINCIPAL ========== */
+    .main-container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Cartes sections */
+    .section-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.6rem 1.8rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      border: 1px solid #dce7ef;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0a3b2f;
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-left: 5px solid #2c8f6b;
+      padding-left: 16px;
+    }
+
+    .section-sub {
+      color: #4a627a;
+      margin-bottom: 1.4rem;
+      margin-left: 21px;
+      font-size: 0.9rem;
+    }
+
+    /* Grille des services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .service-item {
+      background: #f9fdfe;
+      border-radius: 1rem;
+      padding: 0.9rem 1rem;
+      border: 1px solid #e2edf2;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: 0.1s;
+    }
+    .service-item:hover {
+      background: #eef7f3;
+    }
+    .service-icon {
+      font-size: 1.7rem;
+    }
+    .service-name {
+      font-weight: 600;
+      color: #1e4a3c;
+    }
+    .service-desc {
+      font-size: 0.7rem;
+      color: #5f7e6b;
+    }
+
+    /* Tableau des rendez-vous */
+    .table-responsive {
+      overflow-x: auto;
+      border-radius: 1rem;
+      margin: 1rem 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      min-width: 650px;
+    }
+    th {
+      background: #e6f0ec;
+      color: #0a3b2f;
+      font-weight: 700;
+      padding: 12px 10px;
+      text-align: left;
+      border-bottom: 2px solid #c8dbd2;
+    }
+    td {
+      padding: 12px 10px;
+      border-bottom: 1px solid #e2edf2;
+      vertical-align: middle;
+    }
+    tr:hover td {
+      background: #fafefc;
+    }
+    .badge-spec {
+      background: #dff0ea;
+      border-radius: 30px;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #146b4e;
+      display: inline-block;
+    }
+
+    /* Checkboxes */
+    .type-rdv-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .type-rdv-list label {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.8rem;
+      background: #f2f6f9;
+      padding: 4px 10px;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    /* Formulaire de consultation */
+    .form-consult {
+      background: #fafdff;
+      border-radius: 1.2rem;
+      padding: 1.4rem;
+      margin-top: 1rem;
+      border: 1px solid #dde9f0;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .full-width {
+      grid-column: span 2;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .form-group label {
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #1d5a48;
+    }
+    .required:after {
+      content: " *";
+      color: #c03a2b;
+    }
+    input, select, textarea {
+      padding: 10px 12px;
+      border: 1px solid #cfdfe8;
+      border-radius: 0.9rem;
+      font-family: inherit;
+      font-size: 0.85rem;
+      background: white;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #2c8f6b;
+      box-shadow: 0 0 0 2px rgba(44,143,107,0.2);
+    }
+    .btn-submit {
+      background: #0a3b2f;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-weight: 700;
+      border-radius: 2rem;
+      cursor: pointer;
+      width: 100%;
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+      transition: 0.2s;
+    }
+    .btn-submit:hover {
+      background: #1a5e48;
+      transform: translateY(-2px);
+    }
+    .confirmation-block {
+      background: #e0f2e9;
+      border-radius: 1.2rem;
+      padding: 1rem;
+      margin-top: 1.2rem;
+      border-left: 6px solid #1b7e5c;
+      display: none;
+    }
+    .confirmation-block:target {
+      display: block;
+    }
+    .btn-back {
+      display: inline-block;
+      background: #eef2f7;
+      color: #1a4e3e;
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 2rem;
+      font-size: 0.75rem;
+      margin-top: 8px;
+    }
+
+    /* ========== FOOTER (identique page Docteur) ========== */
+    footer {
+      background: #0a3b2f;
+      color: white;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      color: #94f7a4;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-section a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .footer-section a:hover {
+      text-decoration: underline;
+      color: #c0e0d4;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      background: #2c7f64;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      transition: 0.2s;
+      color: white;
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      background: #4aa383;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 1rem;
+      border-top: 1px solid #2e6b58;
+      font-size: 0.75rem;
+      background: #08352a;
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .hospital-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      nav {
+        justify-content: center;
+      }
+      .urgence-badge {
+        white-space: normal;
+      }
+      .main-container {
+        padding: 0 1rem;
+      }
+      .section-title {
+        font-size: 1.3rem;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .full-width {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== EN-TÊTE (identique page Docteur) ========== -->
+<div class="hospital-header">
+  <div class="logo-area">
+    <h1><span>🏥</span> Hôpital Universitaire de Delmas <span style="font-size:1rem;">Haïti</span></h1>
+    <p>📍 Route de Delmas 75, Port-au-Prince | 📞 +509 28 15 12 34 | ✉️ contact@hudelmas.ht</p>
+  </div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="services.html">Services</a>
+    <a href="docteur.html">Docteurs</a>
+    <a href="rendez.html">Rendez-vous</a>
+    <a href="contact.html">Contact</a>
+    <div class="urgence-badge">
+      🚨 Urgences 24/24 : 116
+    </div>
+  </nav>
+</div>
+
+<!-- ========== CONTENU PRINCIPAL ========== -->
+<div class="main-container">
+
+  <!-- SECTION SERVICES -->
+  <div class="section-card">
+    <div class="section-title"><span>🏛️</span> Services hospitaliers</div>
+    <div class="section-sub">Offre complète de soins – spécialités disponibles 7j/7</div>
+    <div class="services-grid">
+      <div class="service-item"><span class="service-icon">👨‍⚕️</span><div><div class="service-name">Médecine générale</div><div class="service-desc">Consultations, suivi global</div></div></div>
+      <div class="service-item"><span class="service-icon">👶</span><div><div class="service-name">Pédiatrie</div><div class="service-desc">Nourrissons, enfants, vaccins</div></div></div>
+      <div class="service-item"><span class="service-icon">❤️</span><div><div class="service-name">Cardiologie</div><div class="service-desc">HTA, insuffisance cardiaque</div></div></div>
+      <div class="service-item"><span class="service-icon">🤰</span><div><div class="service-name">Gynéco-obstétrique/Maternité</div><div class="service-desc">Grossesse, suivi gynéco</div></div></div>
+      <div class="service-item"><span class="service-icon">🩺</span><div><div class="service-name">Réanimation / Soins intensifs</div><div class="service-desc">USI, ventilation, monitorage</div></div></div>
+      <div class="service-item"><span class="service-icon">🧠</span><div><div class="service-name">Psychologie</div><div class="service-desc">Soutien psychologique, thérapie</div></div></div>
+      <div class="service-item"><span class="service-icon">🚑</span><div><div class="service-name">Urgence</div><div class="service-desc">Accueil 24h, traumatologie</div></div></div>
+      <div class="service-item"><span class="service-icon">🔬</span><div><div class="service-name">Laboratoire médical</div><div class="service-desc">Analyses sanguines, microbiologie</div></div></div>
+      <div class="service-item"><span class="service-icon">🤝</span><div><div class="service-name">Service social</div><div class="service-desc">Aide, orientation, suivi social</div></div></div>
+      <div class="service-item"><span class="service-icon">💊</span><div><div class="service-name">Pharmacologie</div><div class="service-desc">Recherche clinique, études</div></div></div>
+      <div class="service-item"><span class="service-icon">🏪</span><div><div class="service-name">Pharmacie hospitalière</div><div class="service-desc">Délivrance médicaments, conseils</div></div></div>
+    </div>
+  </div>
+
+  <!-- TABLEAU DES RENDEZ-VOUS -->
+  <div class="section-card">
+    <div class="section-title"><span>📅</span> Rendez-vous</div>
+    <div class="section-sub">Médecins, horaires, contact – cochez le(s) type(s) de soin souhaité(s)</div>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr><th>👨‍⚕️ Médecin / Spécialité</th><th>📞 Téléphone / Contact</th><th>⏰ Horaires disponibles</th><th>✔️ Types de soins (plusieurs choix)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Dr. Marie-Josée Clervaux</strong><br><span class="badge-spec">Médecine générale</span></td><td>+509 37 12 34 56</td><td>Lun-Ven 8h-16h<br>Sam 9h-12h</td><td><div class="type-rdv-list"><label><input type="checkbox"> Consultation</label><label><input type="checkbox"> Vaccination</label><label><input type="checkbox"> Suivi médical</label><label><input type="checkbox"> Urgence</label></div></td></tr>
+          <tr><td><strong>Dr. Jean-Robert Auguste</strong><br><span class="badge-spec">Pédiatrie</span></td><td>+509 37 98 76 54</td><td>Lun-Ven 9h-17h<br>Mercredi 13h-17h</td><td><div class="type-rdv-list"><label><input type="checkbox"> Consultation</label><label><input type="checkbox"> Vaccination</label><label><input type="checkbox"> Suivi médical</label><label><input type="checkbox"> Urgence</label></div></td></tr>
+          <tr><td><strong>Dr. Katia Désir</strong><br><span class="badge-spec">Cardiologie</span></td><td>+509 37 44 55 66</td><td>Mar, Jeu 9h-15h<br>Ven 8h-12h</td><td><div class="type-rdv-list"><label><input type="checkbox"> Consultation</label><label><input type="checkbox"> Suivi médical</label><label><input type="checkbox"> Urgence</label></div></td></tr>
+          <tr><td><strong>Dr. Emmanuelle Pierre</strong><br><span class="badge-spec">Gynéco-obstétrique</span></td><td>+509 37 77 88 99</td><td>Lun-Ven 10h-18h<br>Samedi sur RDV</td><td><div class="type-rdv-list"><label><input type="checkbox"> Consultation</label><label><input type="checkbox"> Suivi médical</label></div></td></tr>
+          <tr><td><strong>Dr. Luckner Rosier</strong><br><span class="badge-spec">Réanimation / soins intensifs</span></td><td>+509 37 11 22 33</td><td>Service 24/24 <br>Consultation pré-anesthésie sur RDV</td><td><div class="type-rdv-list"><label><input type="checkbox"> Consultation</label><label><input type="checkbox"> Suivi médical</label><label><input type="checkbox"> Urgence</label></div></td></tr>
+          <tr><td><strong>Dr. Myriam Charles</strong><br><span class="badge-spec">Psychologie</span></td><td>+509 37 55 66 77</td><td>Lun, Mer, Ven 10h-16h</td><td><div class="type-rdv-list"><label><input type="checkbox"> Consultation</label><label><input type="checkbox"> Suivi médical</label></div></td></tr>
+          <tr><td><strong>Service Urgence</strong><br><span class="badge-spec">Urgence adulte/pédiatrique</span></td><td><strong>📞 116</strong> (SAMU) / +509 28 15 12 40</td><td>H24 – 7j/7</td><td><label><input type="checkbox" checked disabled> Urgence immédiate</label> <span style="font-size:0.7rem;">(sans RDV)</span></td></tr>
+          <tr><td><strong>Dr. Antoine Fresnel</strong><br><span class="badge-spec">Laboratoire médical / biologie</span></td><td>+509 37 99 00 11</td><td>Lun-Sam 7h-15h</td><td><label><input type="checkbox"> Bilan / prélèvement (Consultation)</label></td></tr>
+          <tr><td><strong>Service social & pharmacie</strong><br><span class="badge-spec">Assistance / délivrance</span></td><td>+509 37 22 33 44</td><td>Lun-Ven 8h-14h</td><td><label><input type="checkbox"> Suivi social / pharmacie</label></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="font-size:0.7rem; background:#f4faf7; padding:8px; border-radius:16px; margin-top:8px;">
+      ✅ Les cases à cocher permettent de sélectionner le motif (consultation, vaccination, suivi médical, urgence). Veuillez contacter le secrétariat pour finaliser le RDV.
+    </div>
+  </div>
+
+  <!-- FORMULAIRE DE CONSULTATION -->
+  <div class="section-card" id="formulaire">
+    <div class="section-title"><span>📝</span> Formulaire de consultation</div>
+    <div class="section-sub">Pré-demande de rendez-vous (remplissez et recevez une confirmation)</div>
+    <div class="form-consult">
+      <form action="https://formspree.io/f/xlgzldgr" method="POST">
+        <div class="form-grid">
+          <div class="form-group"><label class="required">Nom complet</label><input type="text" name="nom" required placeholder="Ex: Joseph Pierre"></div>
+          <div class="form-group"><label class="required">Téléphone / WhatsApp</label><input type="tel" name="tel" required placeholder="+509 XX XX XX XX"></div>
+          <div class="form-group"><label class="required">Email</label><input type="email" name="email" required placeholder="exemple@domaine.ht"></div>
+          <div class="form-group"><label class="required">Service souhaité</label>
+            <select name="service" required>
+              <option value="">-- Choisissez --</option>
+              <option>Médecine générale</option><option>Pédiatrie</option><option>Cardiologie</option>
+              <option>Gynéco-obstétrique</option><option>Réanimation/soins intensifs</option>
+              <option>Psychologie</option><option>Urgence</option><option>Laboratoire médical</option>
+              <option>Service social</option><option>Pharmacie hospitalière</option>
+            </select>
+          </div>
+          <div class="form-group"><label class="required">Type de soin principal</label>
+            <select name="type_soin" required>
+              <option value="consultation">Consultation générale</option>
+              <option value="vaccination">Vaccination</option>
+              <option value="suivi">Suivi médical</option>
+              <option value="urgence">Urgence (évaluation rapide)</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Date souhaitée (approx.)</label><input type="date" name="date_pref"></div>
+          <div class="form-group full-width"><label>Message / symptômes (optionnel)</label><textarea rows="2" name="message" placeholder="Décrivez brièvement votre motif ou besoins spécifiques..."></textarea></div>
+        </div>
+        <button type="submit" class="btn-submit">📩 Envoyer la demande de consultation</button>
+        <p style="font-size:0.7rem; margin-top: 10px; text-align:center;">* Tous les champs avec * sont obligatoires. Un agent vous recontactera sous 24h.</p>
+      </form>
+      <div id="confirmation-form" class="confirmation-block">
+        <span style="font-size:1.4rem;">✅</span> <strong>Demande de consultation reçue</strong>
+        <p>Merci, votre pré-demande a été transmise à l’Hôpital Universitaire de Delmas. Vous recevrez un appel ou un SMS pour fixer le rendez-vous définitif.</p>
+        <a href="#formulaire" class="btn-back">← Retour au formulaire</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Coordonnées additionnelles -->
+  <div style="background:#eef3f0; border-radius:1.2rem; padding:1rem; font-size:0.8rem; text-align:center;">
+    <span>🏥</span> Adresse : Route de Delmas 75, angle ruelle Lamarre, Port-au-Prince | <span>📞</span> Central : +509 28 15 12 12 | <span>🕒</span> Accueil administratif : Lun-Ven 7h-16h
+  </div>
+</div>
+
+<!-- ========== FOOTER (identique page Docteur) ========== -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>Hôpital Universitaire de Delmas</h3>
+      <p>Votre partenaire de confiance pour la santé et les solutions en Haïti.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Liens rapides</h3>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="docteur.html">Docteurs</a></li>
+        <li><a href="rendez.html">Rendez-vous</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Suivez-nous</h3>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="https://wa.me/43111341" aria-label="WhatsApp">WA</a>
+        <a href="#" aria-label="TikTok">TT</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>🏥 Adresse : Route de Delmas 75, angle ruelle Lamarre, Port-au-Prince | 📞 Standard : +509 28 15 12 12 | 🕒 Accueil : Lun-Ven 7h-16h</span><br>
+    <span>© Hôpital Universitaire de Delmas – Haïti – Soins accessibles, qualité et humanité. Urgence 116 – Laboratoire & pharmacie ouverts tous les jours.</span>
+    <p style="margin-top: 10px;">&copy; Hôpital Universitaire de Delmas. Tous droits réservés.</p>
+  </div>
+</footer>
+
+</body>
+</html>

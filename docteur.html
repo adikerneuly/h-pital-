@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Docteurs - Hôpital Universitaire de Delmas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: #eef3f0;
+      color: #1a3a2e;
+      line-height: 1.45;
+    }
+
+    /* ========== EN-TÊTE (identique page RDV) ========== */
+    .hospital-header {
+      background: #0a3b2f;
+      color: white;
+      padding: 1.2rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    }
+
+    .logo-area h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .logo-area h1 span {
+      font-size: 1.9rem;
+    }
+
+    .logo-area p {
+      font-size: 0.75rem;
+      opacity: 0.85;
+      margin-top: 6px;
+    }
+
+    .urgence-badge {
+      background: #c03a2b;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #c0e0d4;
+      text-decoration: underline;
+    }
+
+    /* ========== CONTENU PRINCIPAL ========== */
+    .main-container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.6rem 1.8rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      border: 1px solid #dce7ef;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0a3b2f;
+      margin-bottom: 1rem;
+      border-left: 5px solid #2c8f6b;
+      padding-left: 16px;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      min-width: 500px;
+    }
+
+    th, td {
+      border: 1px solid #cbdcd3;
+      padding: 12px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #e6f0ec;
+      color: #0a3b2f;
+      font-weight: 700;
+    }
+
+    tr:hover td {
+      background: #fafefc;
+    }
+
+    .map-container {
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    iframe {
+      width: 100%;
+      max-width: 800px;
+      height: 350px;
+      border-radius: 1rem;
+      border: 0;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: #0a3b2f;
+      color: white;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      color: #94f7a4;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-section a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .footer-section a:hover {
+      text-decoration: underline;
+      color: #c0e0d4;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      background: #2c7f64;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      transition: 0.2s;
+      color: white;
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      background: #4aa383;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 1rem;
+      border-top: 1px solid #2e6b58;
+      font-size: 0.75rem;
+      background: #08352a;
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .hospital-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      nav {
+        justify-content: center;
+      }
+      .urgence-badge {
+        white-space: normal;
+      }
+      .main-container {
+        padding: 0 1rem;
+      }
+      .section-title {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== EN-TÊTE ========== -->
+<div class="hospital-header">
+  <div class="logo-area">
+    <h1><span>🏥</span> Hôpital Universitaire de Delmas <span style="font-size:1rem;">Haïti</span></h1>
+    <p>📍 Route de Delmas 75, Port-au-Prince | 📞 +509 28 15 12 34 | ✉️ contact@hudelmas.ht</p>
+  </div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="services.html">Services</a>
+    <a href="docteur.html">Docteurs</a>
+    <a href="rendez.html">Rendez-vous</a>
+    <a href="contact.html">Contact</a>
+    <div class="urgence-badge">
+      🚨 Urgences 24/24 : 116
+    </div>
+  </nav>
+</div>
+
+<!-- ========== CONTENU PRINCIPAL ========== -->
+<div class="main-container">
+
+  <!-- SECTION DOCTEUR 1 -->
+  <div class="section-card">
+    <div class="section-title">👨‍⚕️ Information du docteur 1</div>
+    <div class="table-responsive">
+      <table>
+        <tr><th>Nom</th><td>Dr Jean Pierre</td></tr>
+        <tr><th>Spécialité</th><td>Médecine Générale</td></tr>
+        <tr><th>Expérience</th><td>10 ans</td></tr>
+        <tr><th>Horaires</th><td>Lundi-Vendredi : 8h à 16h</td></tr>
+        <tr><th>Téléphone</th><td>+125 00025464</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- NOS SERVICES MÉDICAUX (premier tableau) -->
+  <div class="section-card">
+    <div class="section-title">📋 Nos services médicaux</div>
+    <div class="table-responsive">
+      <table>
+        <thead><tr><th>Service</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>Consultation</td><td>Consultation médicale générale</td></tr>
+          <tr><td>Vaccination</td><td>Vaccins pour enfants et adultes</td></tr>
+          <tr><td>Suivi médical</td><td>Suivi régulier des patients</td></tr>
+          <tr><td>Urgence</td><td>Soins en cas d'urgence médicale</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION DOCTEUR 2 -->
+  <div class="section-card">
+    <div class="section-title">👨‍⚕️ Information du docteur 2</div>
+    <div class="table-responsive">
+      <table>
+        <tr><th>Nom</th><td>Dr Salomon MONTEAU</td></tr>
+        <tr><th>Spécialité</th><td>Dentiste</td></tr>
+        <tr><th>Expérience</th><td>15 ans</td></tr>
+        <tr><th>Horaires</th><td>Lundi-Samedi : 7h à 17h</td></tr>
+        <tr><th>Téléphone</th><td>+125 22435994</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- DEUXIÈME TABLEAU DES SERVICES -->
+  <div class="section-card">
+    <div class="section-title">🏥 Autres services</div>
+    <div class="table-responsive">
+      <table>
+        <thead><tr><th>Service</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>Pédiatrie</td><td>Consultation médicale spécialisée</td></tr>
+          <tr><td>Vaccination</td><td>Vaccins pour enfants et adultes</td></tr>
+          <tr><td>Bloc opératoire</td><td>Suivi régulier des patients</td></tr>
+          <tr><td>Pharmacie hospitalière</td><td>Soins en cas d'urgence médicale</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- POURQUOI NOUS CHOISIR -->
+  <div class="section-card">
+    <div class="section-title">⭐ Pourquoi nous choisir ?</div>
+    <div class="table-responsive">
+      <table>
+        <thead><tr><th>Atouts</th><th>Nos valeurs</th></tr></thead>
+        <tbody>
+          <tr><td>Personnel qualifié et expérimenté</td><td>Professionnalisme</td></tr>
+          <tr><td>Équipements modernes</td><td>Respect</td></tr>
+          <tr><td>Accueil chaleureux</td><td>Éthique</td></tr>
+          <tr><td>Service rapide et efficace</td><td>Compassion</td></tr>
+          <tr><td>Disponibilité 24h/24</td><td>Engagement</td></tr>
+          <tr><td>Engagement</td><td>Informations pratiques</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- LOCALISATION -->
+  <div class="section-card" style="text-align: center;">
+    <div class="section-title">📍 Localisation</div>
+    <div class="map-container">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83998.96790059289!2d2.2644620280198944!3d48.85882541969022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e1f06e2b70f%3A0x40b82c3688c9460!2sParis%2C%20France!5e0!3m2!1sfr!2sht!4v1772179808891!5m2!1sfr!2sht" 
+        width="800" height="350" style="border:0; border-radius: 1rem;" allowfullscreen="" loading="lazy">
+      </iframe>
+    </div>
+    <p style="margin-top: 0.8rem;">📍 Route de Delmas 75, angle ruelle Lamarre, Port-au-Prince</p>
+  </div>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>Hôpital Universitaire de Delmas</h3>
+      <p>Votre partenaire de confiance pour la santé et les solutions en Haïti.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Liens rapides</h3>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="docteur.html">Docteurs</a></li>
+        <li><a href="rendez.html">Rendez-vous</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Suivez-nous</h3>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="https://wa.me/43111341" aria-label="WhatsApp">WA</a>
+        <a href="https://www.tiktok.com/@Nurse_Tchedjoy" aria-label="TikTok">TT</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>🏥 Adresse : Route de Delmas 75, angle ruelle Lamarre, Port-au-Prince | 📞 Standard : +509 28 15 12 12 | 🕒 Accueil : Lun-Ven 7h-16h</span><br>
+    <span>© Hôpital Universitaire de Delmas – Haïti – Soins accessibles, qualité et humanité. Urgence 116 – Laboratoire & pharmacie ouverts tous les jours.</span>
+    <!-- Ligne ajoutée à la demande de l'utilisateur -->
+    <p style="margin-top: 10px;">&copy; Hôpital Universitaire de Delmas. Tous droits réservés.</p>
+  </div>
+</footer>
+
+</body>
+</html>

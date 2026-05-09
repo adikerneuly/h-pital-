@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Services - Hôpital Universitaire de Delmas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: #eef3f0;
+      color: #1a3a2e;
+      line-height: 1.45;
+    }
+
+    /* ========== EN-TÊTE (identique page RDV) ========== */
+    .hospital-header {
+      background: #0a3b2f;
+      color: white;
+      padding: 1.2rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    }
+
+    .logo-area h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .logo-area h1 span {
+      font-size: 1.9rem;
+    }
+
+    .logo-area p {
+      font-size: 0.75rem;
+      opacity: 0.85;
+      margin-top: 6px;
+    }
+
+    .urgence-badge {
+      background: #c03a2b;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #c0e0d4;
+      text-decoration: underline;
+    }
+
+    /* ========== CONTENU PRINCIPAL ========== */
+    .main-container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0a3b2f;
+      margin: 0 0 2rem 0;
+      border-left: none;
+    }
+
+    /* Grille des services (cartes) */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border: 1px solid #dce7ef;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      color: #0a3b2f;
+      margin-bottom: 0.8rem;
+      font-size: 1.3rem;
+    }
+
+    .card p {
+      color: #3a5a4e;
+      line-height: 1.4;
+    }
+
+    /* Détails des services */
+    .service-detail {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+      border: 1px solid #dce7ef;
+    }
+
+    .service-detail h2 {
+      color: #0a3b2f;
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+    }
+
+    .service-detail p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Galerie d’images */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .gallery-item {
+      border-radius: 1rem;
+      overflow: hidden;
+      background-color: #ddd;
+      height: 160px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+    }
+
+    .gallery-item img:hover {
+      transform: scale(1.05);
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: #0a3b2f;
+      color: white;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      color: #94f7a4;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-section a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .footer-section a:hover {
+      text-decoration: underline;
+      color: #c0e0d4;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      background: #2c7f64;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      transition: 0.2s;
+      color: white;
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      background: #4aa383;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 1rem;
+      border-top: 1px solid #2e6b58;
+      font-size: 0.75rem;
+      background: #08352a;
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .hospital-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      nav {
+        justify-content: center;
+      }
+      .urgence-badge {
+        white-space: normal;
+      }
+      .main-container {
+        padding: 0 1rem;
+      }
+      .section-title {
+        font-size: 1.6rem;
+      }
+      .service-detail h2 {
+        font-size: 1.3rem;
+      }
+      .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== EN-TÊTE ========== -->
+<div class="hospital-header">
+  <div class="logo-area">
+    <h1><span>🏥</span> Hôpital Universitaire de Delmas <span style="font-size:1rem;">Haïti</span></h1>
+    <p>📍 Route de Delmas 75, Port-au-Prince | 📞 +509 28 15 12 34 | ✉️ contact@hudelmas.ht</p>
+  </div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="services.html">Services</a>
+    <a href="docteur.html">Docteurs</a>
+    <a href="rendez.html">Rendez-vous</a>
+    <a href="contact.html">Contact</a>
+    <div class="urgence-badge">
+      🚨 Urgences 24/24 : 116
+    </div>
+  </nav>
+</div>
+
+<!-- ========== CONTENU PRINCIPAL ========== -->
+<div class="main-container">
+  <h1 class="section-title">Nos Services</h1>
+
+  <!-- Cartes des services -->
+  <div class="services-grid">
+    <div class="card"><h3>🩺 Consultation générale</h3><p>Diagnostic et traitement des maladies courantes par des médecins qualifiés.</p></div>
+    <div class="card"><h3>👶 Pédiatrie</h3><p>Soins médicaux adaptés aux nourrissons, enfants et adolescents.</p></div>
+    <div class="card"><h3>🤰 Maternité</h3><p>Suivi de grossesse, accouchement et soins postnataux sécurisés.</p></div>
+    <div class="card"><h3>🚑 Urgences</h3><p>Service disponible 24h/24 pour toutes les situations critiques.</p></div>
+    <div class="card"><h3>💊 Pharmacie</h3><p>Médicaments disponibles sur place avec conseils professionnels.</p></div>
+    <div class="card"><h3>🧪 Laboratoire</h3><p>Analyses médicales rapides et fiables pour un diagnostic précis.</p></div>
+    <div class="card"><h3>❤️ Cardiologie</h3><p>Suivi et traitement des maladies du cœur.</p></div>
+    <div class="card"><h3>🦷 Soins dentaires</h3><p>Consultations, nettoyage et traitement des problèmes dentaires.</p></div>
+  </div>
+
+  <!-- Détails des services (avec galeries) -->
+  <div class="service-detail">
+    <h2>Médecine générale</h2>
+    <p>Nous vous remercions de la confiance que vous nous accordez. L'ensemble du personnel médical paramédical et administratif s'engage à vous offrir des soins de qualité, dans le respect de votre dignité, de votre sécurité et de votre confidentialité. Nous vous prions d'agréer l'expression de nos sentiments dévoués et vous souhaitons un prompt et complet rétablissement.</p>
+    <p>La médecine générale est un service fondamental de l’hôpital qui assure la prise en charge des patients souffrant de diverses pathologies courantes ou complexes ne nécessitant pas immédiatement une spécialisation précise. Elle joue un rôle essentiel dans le diagnostic, le traitement, la prévention et le suivi médical des patients. Les médecins généralistes évaluent l’état de santé global du patient, prescrivent les soins nécessaires et, si besoin, l’orientent vers un service spécialisé. Ce service constitue souvent le premier point de contact entre le patient et l’établissement de santé.</p>
+    <div class="gallery">
+      <div class="gallery-item"><img src="OIP%20(53).webp" alt="Consultation"></div>
+      <div class="gallery-item"><img src="OIP%20(5).webp" alt="Soins"></div>
+      <div class="gallery-item"><img src="download%20(1).webp" alt="Médecin"></div>
+      <div class="gallery-item"><img src="th.webp" alt="Patient"></div>
+      <div class="gallery-item"><img src="OIP%20(4).webp" alt="Équipe médicale"></div>
+      <div class="gallery-item"><img src="OIP%20(3).webp" alt="Stéthoscope"></div>
+      <div class="gallery-item"><img src="OIP%20(7).webp" alt="Hôpital"></div>
+      <div class="gallery-item"><img src="usns-comfort-106.webp" alt="Service"></div>
+    </div>
+  </div>
+
+  <div class="service-detail">
+    <h2>Pédiatrie</h2>
+    <p>La pédiatrie est le service médical spécialisé dans la prise en charge des nourrissons, des enfants et des adolescents. Elle s’occupe du diagnostic, du traitement et du suivi des maladies propres à l’enfant, tout en veillant à son développement physique, mental et émotionnel. Le service de pédiatrie assure également la prévention, notamment par la vaccination et le suivi de la croissance. L’équipe soignante, formée pour répondre aux besoins spécifiques des enfants, travaille en collaboration avec les parents afin de garantir des soins adaptés et un environnement rassurant pour les jeunes patients.</p>
+    <div class="gallery">
+      <div class="gallery-item"><img src="OIP%20(8).webp" alt="Enfant"></div>
+      <div class="gallery-item"><img src="OIP%20(9).webp" alt="Pédiatre"></div>
+      <div class="gallery-item"><img src="OIP%20(10).webp" alt="Consultation enfant"></div>
+      <div class="gallery-item"><img src="OIP%20(11).webp" alt="Vaccination"></div>
+      <div class="gallery-item"><img src="OIP%20(17).webp" alt="Jeune patient"></div>
+      <div class="gallery-item"><img src="OIP%20(16).webp" alt="Salle de jeu"></div>
+      <div class="gallery-item"><img src="OIP%20(15).webp" alt="Maternité"></div>
+      <div class="gallery-item"><img src="OIP%20(13).webp" alt="Nourrisson"></div>
+    </div>
+  </div>
+
+  <div class="service-detail">
+    <h2>Cardiologie</h2>
+    <p>La cardiologie est le service spécialisé dans le diagnostic, le traitement et la prévention des maladies du cœur et des vaisseaux sanguins. Elle prend en charge des affections telles que l’hypertension artérielle, les troubles du rythme cardiaque, les insuffisances cardiaques ou encore les maladies coronariennes. Ce service dispose d’équipements spécifiques permettant de réaliser des examens comme l’électrocardiogramme (ECG) ou l’échographie cardiaque. Les cardiologues assurent également le suivi des patients et les conseillent sur les mesures à adopter pour préserver une bonne santé cardiovasculaire.</p>
+    <div class="gallery">
+      <div class="gallery-item"><img src="OIP%20(19).webp" alt="ECG"></div>
+      <div class="gallery-item"><img src="OIP%20(22).webp" alt="Cœur"></div>
+      <div class="gallery-item"><img src="OIP%20(18).webp" alt="Cardiologue"></div>
+      <div class="gallery-item"><img src="OIP%20(21).webp" alt="Échographie"></div>
+      <div class="gallery-item"><img src="OIP%20(20).webp" alt="Consultation cardiologie"></div>
+      <div class="gallery-item"><img src="OIP%20(23).webp" alt="Tension artérielle"></div>
+      <div class="gallery-item"><img src="OIP%20(24).webp" alt="Stéthoscope"></div>
+      <div class="gallery-item"><img src="OIP%20(25).webp" alt="Cœur santé"></div>
+    </div>
+  </div>
+
+  <div class="service-detail">
+    <h2>Neurologie</h2>
+    <p>La neurologie est le service médical spécialisé dans le diagnostic et le traitement des maladies du système nerveux, comprenant le cerveau, la moelle épinière et les nerfs. Elle prend en charge des affections telles que les accidents vasculaires cérébraux (AVC), l’épilepsie, les migraines, les troubles neurologiques et les maladies dégénératives. Ce service utilise des examens spécifiques pour évaluer le fonctionnement du système nerveux et établir un diagnostic précis. Les neurologues assurent également le suivi des patients et travaillent en collaboration avec d’autres spécialistes afin d’offrir une prise en charge adaptée et complète.</p>
+    <div class="gallery">
+      <div class="gallery-item"><img src="OIP%20(26).webp" alt="Cerveau"></div>
+      <div class="gallery-item"><img src="OIP%20(27).webp" alt="Neurologue"></div>
+      <div class="gallery-item"><img src="OIP%20(28).webp" alt="IRM"></div>
+      <div class="gallery-item"><img src="OIP%20(29).webp" alt="Consultation neurologie"></div>
+      <div class="gallery-item"><img src="OIP%20(30).webp" alt="Scanner"></div>
+      <div class="gallery-item"><img src="OIP%20(31).webp" alt="Électroencéphalogramme"></div>
+      <div class="gallery-item"><img src="OIP%20(32).webp" alt="Rééducation"></div>
+      <div class="gallery-item"><img src="OIP%20(33).webp" alt="Système nerveux"></div>
+    </div>
+  </div>
+
+  <div class="service-detail">
+    <h2>Gynécologie/Obstétrique</h2>
+    <p>Le service de gynécologie et d’obstétrique est spécialisé dans la santé de la femme, notamment en ce qui concerne le système reproducteur, la grossesse et l’accouchement. La gynécologie prend en charge le diagnostic, le traitement et la prévention des maladies féminines, tandis que l’obstétrique s’occupe du suivi de la grossesse, de l’accouchement et des soins postnataux. Ce service accompagne les femmes à chaque étape de leur vie, en assurant des consultations, des examens de suivi et des conseils adaptés, tout en veillant à la sécurité de la mère et de l’enfant.</p>
+    <div class="gallery">
+      <div class="gallery-item"><img src="OIP%20(35).webp" alt="Gynécologie"></div>
+      <div class="gallery-item"><img src="OIP%20(36).webp" alt="Obstétrique"></div>
+      <div class="gallery-item"><img src="OIP%20(37).webp" alt="Échographie"></div>
+      <div class="gallery-item"><img src="OIP%20(38).webp" alt="Femme enceinte"></div>
+      <div class="gallery-item"><img src="OIP%20(39).webp" alt="Nouveau-né"></div>
+      <div class="gallery-item"><img src="OIP%20(40).webp" alt="Accouchement"></div>
+      <div class="gallery-item"><img src="OIP%20(41).webp" alt="Allaitement"></div>
+      <div class="gallery-item"><img src="OIP%20(43).webp" alt="Soins postnatals"></div>
+    </div>
+  </div>
+
+  <div class="service-detail">
+    <h2>Réanimation/Soins intensifs</h2>
+    <p>Le service de réanimation, ou soins intensifs, est destiné à la prise en charge des patients en état critique ou présentant une défaillance grave d’un ou de plusieurs organes. Il fonctionne en continu, 24 heures sur 24, et dispose d’équipements spécialisés permettant une surveillance étroite et permanente, tels que les respirateurs artificiels et les moniteurs. L’équipe médicale, hautement qualifiée, intervient rapidement pour stabiliser l’état des patients et leur administrer des soins complexes. Ce service joue un rôle vital dans la survie des patients et leur récupération, en collaboration avec les autres services de l’hôpital.</p>
+    <div class="gallery">
+      <div class="gallery-item"><img src="OIP%20(44).webp" alt="Réanimation"></div>
+      <div class="gallery-item"><img src="OIP%20(45).webp" alt="Soins intensifs"></div>
+      <div class="gallery-item"><img src="OIP%20(46).webp" alt="Ventilation"></div>
+      <div class="gallery-item"><img src="OIP%20(48).webp" alt="Moniteur"></div>
+    </div>
+  </div>
+
+  <div class="service-detail">
+    <h2>Psychologie</h2>
+    <p>Le service de psychologie hospitalière est dédié à l’accompagnement du bien-être mental et émotionnel des patients. Il intervient auprès des personnes confrontées à la maladie, au stress, à l’anxiété, à la dépression ou à des situations difficiles liées à leur état de santé. Les psychologues offrent une écoute attentive, un soutien adapté et, si nécessaire, des suivis thérapeutiques. Ce service travaille en collaboration avec l’équipe médicale afin d’assurer une prise en charge globale du patient, en tenant compte de ses dimensions psychologiques et émotionnelles.</p>
+    <div class="gallery">
+      <div class="gallery-item"><img src="OIP%20(49).webp" alt="Psychologue"></div>
+      <div class="gallery-item"><img src="OIP%20(50).webp" alt="Consultation psychologique"></div>
+      <div class="gallery-item"><img src="OIP%20(51).webp" alt="Soutien"></div>
+      <div class="gallery-item"><img src="OIP%20(52).webp" alt="Bien-être"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>Hôpital Universitaire de Delmas</h3>
+      <p>Votre partenaire de confiance pour la santé et les solutions en Haïti.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Liens rapides</h3>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="docteur.html">Docteurs</a></li>
+        <li><a href="rendez.html">Rendez-vous</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Suivez-nous</h3>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="https://wa.me/43111341" aria-label="WhatsApp">WA</a>
+        <a href="https://www.tiktok.com/@Nurse_Tchedjoy" aria-label="TikTok">TT</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>🏥 Adresse : Route de Delmas 75, angle ruelle Lamarre, Port-au-Prince | 📞 Standard : +509 28 15 12 12 | 🕒 Accueil : Lun-Ven 7h-16h</span><br>
+    <span>© Hôpital Universitaire de Delmas – Haïti – Soins accessibles, qualité et humanité. Urgence 116 – Laboratoire & pharmacie ouverts tous les jours.</span>
+    <!-- Ligne ajoutée à la demande de l'utilisateur -->
+    <p style="margin-top: 10px;">&copy; Hôpital Universitaire de Delmas. Tous droits réservés.</p>
+  </div>
+</footer>
+
+</body>
+</html>

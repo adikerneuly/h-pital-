@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Accueil - Hôpital Universitaire de Delmas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: #eef3f0;
+      color: #1a3a2e;
+      line-height: 1.45;
+    }
+
+    /* ========== EN-TÊTE (identique page RDV) ========== */
+    .hospital-header {
+      background: #0a3b2f;
+      color: white;
+      padding: 1.2rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    }
+
+    .logo-area h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .logo-area h1 span {
+      font-size: 1.9rem;
+    }
+
+    .logo-area p {
+      font-size: 0.75rem;
+      opacity: 0.85;
+      margin-top: 6px;
+    }
+
+    .urgence-badge {
+      background: #c03a2b;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #c0e0d4;
+      text-decoration: underline;
+    }
+
+    /* ========== CONTENU PRINCIPAL ========== */
+    .main-container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0a3b2f 0%, #1a6b55 100%);
+      color: white;
+      text-align: center;
+      padding: 3rem 2rem;
+      border-radius: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #e0a800;
+      color: #0a3b2f;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background-color: #ffc107;
+      transform: translateY(-2px);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: #0a3b2f;
+      margin: 2rem 0 1rem;
+      border-left: 5px solid #2c8f6b;
+      padding-left: 16px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border: 1px solid #dce7ef;
+      transition: transform 0.2s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .service-info {
+      padding: 1.2rem;
+    }
+
+    .service-info h3 {
+      color: #0a3b2f;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-info p {
+      color: #3a5a4e;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .why-choose {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.8rem;
+      margin: 2rem 0;
+      border: 1px solid #dce7ef;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: #0a3b2f;
+      color: white;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      color: #94f7a4;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-section a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .footer-section a:hover {
+      text-decoration: underline;
+      color: #c0e0d4;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      background: #2c7f64;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      transition: 0.2s;
+      color: white;
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      background: #4aa383;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 1rem;
+      border-top: 1px solid #2e6b58;
+      font-size: 0.75rem;
+      background: #08352a;
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .hospital-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      nav {
+        justify-content: center;
+      }
+      .urgence-badge {
+        white-space: normal;
+      }
+      .main-container {
+        padding: 0 1rem;
+      }
+      .hero h1 {
+        font-size: 1.6rem;
+      }
+      h2 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== EN-TÊTE ========== -->
+<div class="hospital-header">
+  <div class="logo-area">
+    <h1><span>🏥</span> Hôpital Universitaire de Delmas <span style="font-size:1rem;">Haïti</span></h1>
+    <p>📍 Route de Delmas 75, Port-au-Prince | 📞 +509 28 15 12 34 | ✉️ contact@hudelmas.ht</p>
+  </div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="services.html">Services</a>
+    <a href="docteur.html">Docteurs</a>
+    <a href="rendez.html">Rendez-vous</a>
+    <a href="contact.html">Contact</a>
+    <div class="urgence-badge">
+      🚨 Urgences 24/24 : 116
+    </div>
+  </nav>
+</div>
+
+<!-- ========== CONTENU PRINCIPAL ========== -->
+<div class="main-container">
+  <div class="hero">
+    <h1>Bienvenue à l’Hôpital Universitaire de Delmas</h1>
+    <p>Des soins de qualité pour vous et votre famille</p>
+    <p>L’Hôpital Universitaire de Delmas, un établissement de santé engagé à offrir des soins de qualité, accessibles à tous, dans un environnement sûr et humain. Notre équipe médicale et administrative travaille chaque jour pour garantir votre bien-être et celui de votre famille. Donnez vie à nos patients.</p>
+    <h1 style="font-size:1.8rem; margin-top:1rem;">Notre mission</h1>
+    <p>Offrir des soins de santé de qualité, respectueux de la dignité humaine, en mettant le patient au centre de toutes nos actions.</p>
+    <a href="rendez.html" class="btn">Prendre rendez-vous</a>
+  </div>
+
+  <h2>Nos services</h2>
+  <div class="services-grid" style="grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); text-align: center;">
+    <div class="service-card" style="padding: 1rem;">🩺 Consultation</div>
+    <div class="service-card" style="padding: 1rem;">👶 Pédiatrie</div>
+    <div class="service-card" style="padding: 1rem;">🤰 Maternité</div>
+    <div class="service-card" style="padding: 1rem;">🚑 Urgences</div>
+    <div class="service-card" style="padding: 1rem;">💊 Pharmacie</div>
+    <div class="service-card" style="padding: 1rem;">🧪 Laboratoire</div>
+  </div>
+
+  <div class="why-choose">
+    <h2 style="margin-top: 0;">Pourquoi nous choisir ?</h2>
+    <p>Notre hôpital offre un service rapide, un personnel qualifié et des équipements modernes pour garantir votre bien-être.</p>
+  </div>
+
+  <h2>Nos spécialités en détail</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <img src="OIP.webp" alt="Pharmacie">
+      <div class="service-info">
+        <h3>Pharmacie hospitalière</h3>
+        <p>La pharmacie hospitalière assure la gestion, le stockage et la distribution sécurisée des médicaments. Elle veille à la qualité et à la traçabilité des traitements.</p>
+      </div>
+    </div>
+    <div class="service-card">
+      <img src="OIP%20(1).webp" alt="Urgences">
+      <div class="service-info">
+        <h3>Urgences</h3>
+        <p>Service 24h/24 pour la prise en charge immédiate des situations graves : accidents, douleurs aiguës, détresse vitale. Évaluation rapide et orientation.</p>
+      </div>
+    </div>
+    <div class="service-card">
+      <img src="OIP%20(2).webp" alt="Bloc opératoire">
+      <div class="service-info">
+        <h3>Bloc opératoire</h3>
+        <p>Équipé de haute technologie, le bloc opératoire accueille les interventions chirurgicales dans des conditions strictes d’hygiène et de sécurité.</p>
+      </div>
+    </div>
+    <div class="service-card">
+      <img src="download.webp" alt="Service social">
+      <div class="service-info">
+        <h3>Service social</h3>
+        <p>Accompagnement des patients et familles face aux difficultés sociales, économiques ou administratives liées à la maladie.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>Hôpital Universitaire de Delmas</h3>
+      <p>Votre partenaire de confiance pour la santé et les solutions en Haïti.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Liens rapides</h3>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="docteur.html">Docteurs</a></li>
+        <li><a href="rendez.html">Rendez-vous</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Suivez-nous</h3>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="https://wa.me/43111341" aria-label="WhatsApp">WA</a>
+        <a href="https://www.tiktok.com/@Nurse_Tchedjoy" aria-label="TikTok">TT</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>🏥 Adresse : Route de Delmas 75, angle ruelle Lamarre, Port-au-Prince | 📞 Standard : +509 28 15 12 12 | 🕒 Accueil : Lun-Ven 7h-16h</span><br>
+    <span>© Hôpital Universitaire de Delmas – Haïti – Soins accessibles, qualité et humanité. Urgence 116 – Laboratoire & pharmacie ouverts tous les jours.</span>
+    <!-- Ligne ajoutée à la demande de l'utilisateur -->
+    <p style="margin-top: 10px;">&copy; Hôpital Universitaire de Delmas. Tous droits réservés.</p>
+  </div>
+</footer>
+
+</body>
+</html>

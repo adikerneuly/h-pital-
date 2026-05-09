@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Contact - Hôpital Universitaire de Delmas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: #eef3f0;
+      color: #1a3a2e;
+      line-height: 1.45;
+    }
+
+    /* ========== EN-TÊTE (identique page Docteur) ========== */
+    .hospital-header {
+      background: #0a3b2f;
+      color: white;
+      padding: 1.2rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    }
+
+    .logo-area h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .logo-area h1 span {
+      font-size: 1.9rem;
+    }
+
+    .logo-area p {
+      font-size: 0.75rem;
+      opacity: 0.85;
+      margin-top: 6px;
+    }
+
+    .urgence-badge {
+      background: #c03a2b;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #c0e0d4;
+      text-decoration: underline;
+    }
+
+    /* ========== CONTENU PRINCIPAL ========== */
+    .main-container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0a3b2f 0%, #1a6b55 100%);
+      color: white;
+      text-align: center;
+      padding: 3rem 2rem;
+      border-radius: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #0a3b2f;
+      margin: 2rem 0 1.5rem;
+    }
+
+    /* Cartes de contact */
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-card {
+      background: white;
+      border-radius: 1.2rem;
+      padding: 1.8rem;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border: 1px solid #dce7ef;
+      transition: transform 0.2s;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .contact-card i {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .contact-card h3 {
+      color: #0a3b2f;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-card p {
+      color: #3a5a4e;
+    }
+
+    /* Formulaire de contact */
+    .contact-form {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      margin-top: 1rem;
+      border: 1px solid #dce7ef;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-form h2 {
+      text-align: center;
+      color: #0a3b2f;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #1d5a48;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cfdfe8;
+      border-radius: 0.8rem;
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: #2c8f6b;
+      box-shadow: 0 0 0 2px rgba(44,143,107,0.2);
+    }
+
+    select.form-control {
+      appearance: none;
+      background: white;
+    }
+
+    textarea.form-control {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .btn {
+      background: #0a3b2f;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-weight: 700;
+      border-radius: 2rem;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1rem;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #1a5e48;
+      transform: translateY(-2px);
+    }
+
+    /* ========== FOOTER (identique page Docteur) ========== */
+    footer {
+      background: #0a3b2f;
+      color: white;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      color: #94f7a4;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-section a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .footer-section a:hover {
+      text-decoration: underline;
+      color: #c0e0d4;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      background: #2c7f64;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      transition: 0.2s;
+      color: white;
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      background: #4aa383;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 1rem;
+      border-top: 1px solid #2e6b58;
+      font-size: 0.75rem;
+      background: #08352a;
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .hospital-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      nav {
+        justify-content: center;
+      }
+      .urgence-badge {
+        white-space: normal;
+      }
+      .main-container {
+        padding: 0 1rem;
+      }
+      .hero h1 {
+        font-size: 1.6rem;
+      }
+      .section-title {
+        font-size: 1.6rem;
+      }
+      .contact-form {
+        padding: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== EN-TÊTE (identique page Docteur) ========== -->
+<div class="hospital-header">
+  <div class="logo-area">
+    <h1><span>🏥</span> Hôpital Universitaire de Delmas <span style="font-size:1rem;">Haïti</span></h1>
+    <p>📍 Route de Delmas 75, Port-au-Prince | 📞 +509 28 15 12 34 | ✉️ contact@hudelmas.ht</p>
+  </div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="services.html">Services</a>
+    <a href="docteur.html">Docteurs</a>
+    <a href="rendez.html">Rendez-vous</a>
+    <a href="contact.html">Contact</a>
+    <div class="urgence-badge">
+      🚨 Urgences 24/24 : 116
+    </div>
+  </nav>
+</div>
+
+<!-- ========== CONTENU PRINCIPAL ========== -->
+<div class="main-container">
+  <div class="hero">
+    <h1>Contactez notre hôpital</h1>
+    <p>Nous sommes à votre écoute pour toute demande d’information ou prise de rendez-vous</p>
+  </div>
+
+  <h2 class="section-title">Nos coordonnées</h2>
+  <div class="contact-info">
+    <div class="contact-card">
+      <i>📞</i>
+      <h3>Téléphone</h3>
+      <p>+509 28 15 12 34 (Standard)<br>Urgences : 116</p>
+    </div>
+    <div class="contact-card">
+      <i>✉️</i>
+      <h3>Email</h3>
+      <p>contact@hudelmas.ht</p>
+    </div>
+    <div class="contact-card">
+      <i>📍</i>
+      <h3>Adresse</h3>
+      <p>Route de Delmas 75, angle ruelle Lamarre, Port-au-Prince, Haïti</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">Écrivez-nous</h2>
+  <div class="contact-form">
+    <form action="https://formspree.io/f/xqenddjr" method="POST">
+      <div class="form-group">
+        <label for="name">Nom complet *</label>
+        <input type="text" id="name" name="name" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input type="email" id="email" name="email" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="service">Service concerné</label>
+        <select id="service" name="service" class="form-control">
+          <option value="">-- Choisissez un service --</option>
+          <option>Médecine générale</option>
+          <option>Vaccination</option>
+          <option>Pédiatrie</option>
+          <option>Cardiologie</option>
+          <option>Neurologie</option>
+          <option>Gynécologie / Obstétrique</option>
+          <option>Psychologie</option>
+          <option>Imagerie médicale</option>
+          <option>Nutrition</option>
+          <option>Laboratoire</option>
+          <option>Réanimation</option>
+          <option>Physiothérapie</option>
+          <option>Dentaire</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message *</label>
+        <textarea id="message" name="message" class="form-control" placeholder="Décrivez votre demande ici" required></textarea>
+      </div>
+      <button type="submit" class="btn">Envoyer le message</button>
+    </form>
+  </div>
+</div>
+
+<!-- ========== FOOTER (identique page Docteur) ========== -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>Hôpital Universitaire de Delmas</h3>
+      <p>Votre partenaire de confiance pour la santé et les solutions en Haïti.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Liens rapides</h3>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="docteur.html">Docteurs</a></li>
+        <li><a href="rendez.html">Rendez-vous</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Suivez-nous</h3>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook">FB</a>
+        <a href="https://wa.me/43111341" aria-label="WhatsApp">WA</a>
+        <a href="#" aria-label="TikTok">TT</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>🏥 Adresse : Route de Delmas 75, angle ruelle Lamarre, Port-au-Prince | 📞 Standard : +509 28 15 12 12 | 🕒 Accueil : Lun-Ven 7h-16h</span><br>
+    <span>© Hôpital Universitaire de Delmas – Haïti – Soins accessibles, qualité et humanité. Urgence 116 – Laboratoire & pharmacie ouverts tous les jours.</span>
+    <p style="margin-top: 10px;">&copy; Hôpital Universitaire de Delmas. Tous droits réservés.</p>
+  </div>
+</footer>
+
+</body>
+</html>
